@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import type { Token } from "./index.d";
 
-import { GETTOKEN, SAVETOKEN } from "./Requests";
-
 const { ipcRenderer } = window.require("electron");
 
 /**
@@ -13,15 +11,15 @@ const useTokenRepository = () => {
   const [token, setToken] = useState<Token>("");
 
   const saveToken = (token: Token) => {
-    ipcRenderer.send(SAVETOKEN, token);
-    ipcRenderer.on(`${GETTOKEN}-response`, (event: any, token: Token) => {
+    ipcRenderer.send("save-token", token);
+    ipcRenderer.on("get-token-response", (event: any, token: Token) => {
       setToken(token);
     });
   };
 
   const getToken = () => {
-    ipcRenderer.send(GETTOKEN);
-    ipcRenderer.on(`${GETTOKEN}-response`, (event: any, token: Token) => {
+    ipcRenderer.send("get-token");
+    ipcRenderer.on("get-token-response", (event: any, token: Token) => {
       setToken(token);
     });
   };

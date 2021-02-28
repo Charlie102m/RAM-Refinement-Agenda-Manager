@@ -3,8 +3,6 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
-const { SAVETOKEN, GETTOKEN, SAVEAGENDA } = require("../src/Data/Requests");
-
 require("@electron/remote/main").initialize();
 
 let win;
@@ -22,6 +20,7 @@ function createWindow() {
     width: 1024,
     height: 728,
     icon: getAssetPath("icon.png"),
+    title: "RAM",
     webPreferences: {
       enableRemoteModule: true,
       nodeIntegration: true,
@@ -44,18 +43,17 @@ app.whenReady().then(createWindow);
 let savedToken = "cahhdzi5rz2eagycnjak7uzgbukhkbujt5eprvpvshitisq4jfoa";
 let agendas = [];
 
-ipcMain.on(SAVETOKEN, (event, token) => {
+ipcMain.on("save-token", (event, token) => {
   savedToken = token;
-  event.reply(`${GETTOKEN}-response`, savedToken);
+  event.reply("get-token-response", savedToken);
 });
 
-ipcMain.on(GETTOKEN, (event) => {
-  event.reply(`${GETTOKEN}-response`, savedToken);
+ipcMain.on("get-token", (event) => {
+  event.reply("get-token-response", savedToken);
 });
 
-ipcMain.on(SAVEAGENDA, (event, agenda) => {
+ipcMain.on("save-agenda", (event, agenda) => {
   agendas = [...agendas.filter((a) => a.id === agenda.id), agenda];
-  console.log(agendas);
   event.returnValue = agenda;
 });
 
