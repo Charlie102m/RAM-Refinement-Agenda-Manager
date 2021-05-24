@@ -2,7 +2,7 @@
   "name": "ram",
   "description": "Electron app with ADO integration for creating refinement agendas and generating planning poker links",
   "author": "Charlie McCabe",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "1.x",
