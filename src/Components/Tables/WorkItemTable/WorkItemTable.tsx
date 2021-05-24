@@ -4,27 +4,18 @@ import { IconButton } from "@material-ui/core";
 
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 
-import type { WorkItem } from "../../Data/index.d";
+import type { WorkItem } from "../../../Data";
 
 import type { Column } from "react-table";
 
-import { BaseTable } from "../";
+import { BaseTable } from "../..";
+
+import { fromCamelCase } from "../helpers/tableHelpers";
 
 interface Props {
   workItems: WorkItem[];
-  onDelete: (workItemId: number) => void;
+  onDelete: (workItemId: WorkItem["id"]) => void;
 }
-
-const fromCamelCase = (str: string): string => {
-  let strSplit = str.split(/(?=[A-Z])/);
-  return strSplit?.length
-    ? strSplit.reduce(
-        (acc, next) =>
-          acc + " " + next.charAt(0).toUpperCase() + next.substring(1),
-        ""
-      )
-    : "";
-};
 
 const WorkItemTable = ({ workItems, onDelete }: Props) => {
   const columns = useMemo(() => {

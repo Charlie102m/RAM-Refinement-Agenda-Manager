@@ -1,4 +1,4 @@
-import { Landing, NewAgenda, Settings } from "../Views";
+import { Landing, AgendaManager, SavedAgendas, Settings } from "../Views";
 
 export interface Route {
   path: string;
@@ -8,8 +8,13 @@ export interface Route {
 
 export const routes: Route[] = [
   {
-    path: "/newagenda",
-    component: NewAgenda,
+    path: "/agendamanager",
+    component: AgendaManager,
+    exact: true,
+  },
+  {
+    path: "/savedagendas",
+    component: SavedAgendas,
     exact: true,
   },
   {
@@ -20,5 +25,6 @@ export const routes: Route[] = [
   {
     path: "",
     component: Landing,
+    exact: true,
   },
 ];

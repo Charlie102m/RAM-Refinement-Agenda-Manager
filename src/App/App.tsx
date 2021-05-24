@@ -10,7 +10,7 @@ import {
 import { routes } from "./routes";
 import type { Route as CustomRoute } from "./routes";
 
-import SettingsApplicationsRoundedIcon from "@material-ui/icons/SettingsApplicationsRounded";
+import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 
 import theme from "./theme";
@@ -28,7 +28,7 @@ export default function App() {
           marginBottom={3}
           borderColor="grey.500"
         >
-          {pathname !== "/" && (
+          {!!pathname && pathname !== "/" && pathname !== "" && (
             <Box display="flex" justifyContent="flex-start" flexGrow={1}>
               <IconButton
                 aria-label="settings"
@@ -47,7 +47,7 @@ export default function App() {
                 style={{ opacity: 0.5 }}
                 onClick={() => push("/settings")}
               >
-                <SettingsApplicationsRoundedIcon />
+                <SettingsRoundedIcon />
               </IconButton>
             </Box>
           )}
